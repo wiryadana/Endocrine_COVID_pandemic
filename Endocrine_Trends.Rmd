@@ -93,18 +93,5 @@ NetMatrix <- biblioNetwork(M, analysis = "collaboration", network = "countries",
 # Plot the network
 net=networkPlot(NetMatrix, n = 30, Title = "Co-Citation Network", type = "fruchterman", size=T, remove.multiple=FALSE, labelsize=0.7,edgesize = 5)
 ```
-### Co-word Analysis
-The aim of the co-word analysis is to map the conceptual structure of a framework using the word co-occurrences in a bibliographic collection.
 
-```{r}
-CS <- conceptualStructure(M,field="ID", method="CA", minDegree=4, clust=5, stemming=FALSE, labelsize=10, documents=10)
-```
-
-### Historical Direct Citation Network
-The historiographic map is a graph proposed by E. Garfield (2004) to represent a chronological network map of most relevant direct citations resulting from a bibliographic collection.
-```{r}
-options(width=130)
-histResults <- histNetwork(M, min.citations = 1, sep = ";")
-net <- histPlot(histResults, n=15, size = 10, labelsize=5)
-```
 
