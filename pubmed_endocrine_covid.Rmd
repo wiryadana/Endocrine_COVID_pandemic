@@ -1,0 +1,45 @@
+---
+title: "Untitled"
+author: "Kadek Adit Wiryadana"
+date: "5/20/2021"
+output: html_document
+---
+
+```{r}
+library(pubmedR)
+library(bibliometrix)
+```
+
+
+```{r}
+api_key <- "14c56656a9acf5680ba08577f35902743908"
+query <- "endocrine*[Title/Abstract] AND covid-19*[Title/Abstract] AND english[LA] AND Journal Article[PT] AND 2019:2021[DP]"
+```
+
+```{r}
+res <- pmQueryTotalCount(query = query, api_key = api_key)
+
+res$total_count
+
+D <- pmApiRequest(query = query, api_key = api_key, limit = res$total_count)
+
+D$query_translation
+
+
+```
+
+```{r}
+M <- pmApi2df(D)
+#write.csv(M, "pubmed.csv")
+```
+
+```{r}
+M <- convert2df(D, dbsource = "pubmed", format = "api")
+write.table(M, "pubmed.txt")
+```
+
+```{r}
+results <- biblioAnalysis(M)
+summary(results)
+```
+
